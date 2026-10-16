@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>중국언어문화예술제 1차 심사표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&family=Noto+Serif+SC:wght@600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>[hidden]{display:none!important} html{-webkit-text-size-adjust:100%} body{margin:0}</style>
+<style>
+/* Layout: sticky roster of 17 on the left, one scoring sheet on the right, action bar pinned to the sheet's foot. Celadon on ink, vermilion only for the seal of submission. */
+:root{
+  --paper:#F3F6F4; --surface:#FFFFFF; --ink:#18211E; --muted:#5A6863; --line:#D6DFDA;
+  --jade:#2B7A67; --jade-ink:#FFFFFF; --jade-soft:#E1EFEA; --seal:#B23A2C; --seal-soft:#F7E4E1; --warn:#9A6210; --warn-soft:#F6ECD9;
+  --f-display:"Noto Serif KR","Noto Serif SC",serif;
+  --f-zh:"Noto Serif SC","Noto Serif KR",serif;
+  --f-body:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111715; --surface:#19211E; --ink:#E4EBE8; --muted:#97A59F; --line:#2B3632;
+  --jade:#5CB59F; --jade-ink:#0E1A16; --jade-soft:#1D3530; --seal:#E26A5C; --seal-soft:#3A2220; --warn:#D9A44C; --warn-soft:#352A17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111715; --surface:#19211E; --ink:#E4EBE8; --muted:#97A59F; --line:#2B3632;
+  --jade:#5CB59F; --jade-ink:#0E1A16; --jade-soft:#1D3530; --seal:#E26A5C; --seal-soft:#3A2220; --warn:#D9A44C; --warn-soft:#352A17; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:0}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{font-family:var(--f-display);font-size:clamp(22px,3vw,30px);line-height:1.25;margin:0;text-wrap:balance}
+.judge-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.judge-line b{color:var(--ink);font-weight:600}
+.savestate{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.savestate::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--jade)}
+.savestate.pending::before{background:var(--warn)}
+.savestate.local::before{background:var(--seal)}
+
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{background:none;border:0;padding:10px 14px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--jade)}
+
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:12px 14px;font-size:14px}
+.notice.warn{background:var(--warn-soft);border-color:transparent;color:var(--ink)}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.legend span b{font-family:var(--f-num);color:var(--ink);margin-right:4px}
+
+/* judging layout */
+.judge{display:grid;grid-template-columns:270px minmax(0,1fr);gap:20px;align-items:start}
+.roster{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.roster-head{display:flex;justify-content:space-between;align-items:baseline;padding:12px 14px;border-bottom:1px solid var(--line)}
+.roster-head h2{font-size:14px;margin:0}
+.progress{font-family:var(--f-num);font-size:13px;color:var(--muted)}
+.bar{height:3px;background:var(--line)}
+.bar i{display:block;height:100%;background:var(--jade);width:0;transition:width .3s}
+.roster ol{list-style:none;margin:0;padding:6px;max-height:min(68vh,760px);overflow:auto}
+.roster li button{width:100%;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;text-align:left;background:none;border:0;border-radius:8px;padding:8px}
+.roster li button:hover{background:var(--paper)}
+.roster li button[aria-current="true"]{background:var(--jade-soft)}
+.rnum{font-family:var(--f-num);font-size:12px;color:var(--muted)}
+.rname{min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.rname span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.rname small{color:var(--muted);font-size:12px}
+.rscore{font-family:var(--f-num);font-size:13px;font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.chip{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip.done{background:var(--jade);border-color:var(--jade);color:var(--jade-ink)}
+.chip.part{background:var(--warn-soft);border-color:transparent;color:var(--warn)}
+.mobile-pick{display:none}
+
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0}
+.sheet-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;padding:20px 22px 16px;border-bottom:1px solid var(--line)}
+.who{display:flex;flex-direction:column;gap:6px;min-width:0}
+.who .num{font-family:var(--f-num);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.who h2{font-family:var(--f-display);font-size:24px;margin:0;line-height:1.25;overflow-wrap:anywhere}
+.who .piece{color:var(--muted);font-size:14px}
+.cat{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.seal{font-family:var(--f-zh);font-size:13px;color:var(--seal);border:1.5px solid var(--seal);border-radius:4px;padding:0 5px;line-height:1.5}
+.cat-pick{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.cat-pick button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 10px}
+.cat-pick button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.total{display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.total .lab{font-size:12px;color:var(--muted)}
+.total .val{font-family:var(--f-num);font-size:36px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.total .val small{font-size:16px;color:var(--muted);font-weight:500}
+
+.items{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 24px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:center}
+.item h3{font-size:16px;margin:0 0 4px;display:flex;gap:8px;align-items:baseline}
+.item h3 .n{font-family:var(--f-num);font-size:13px;color:var(--jade)}
+.item p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
+.item ul.split{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;max-width:62ch}
+.item ul.split li{color:var(--muted);padding-left:10px;border-left:2px solid var(--line)}
+.item ul.split li.on{color:var(--ink);border-left-color:var(--jade)}
+.item ul.split li b{font-weight:600}
+.scale{display:flex;gap:6px}
+.scale button{width:52px;height:52px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0;transition:background .12s,border-color .12s}
+.scale button b{font-family:var(--f-num);font-size:18px;line-height:1.1}
+.scale button span{font-size:10px;color:var(--muted);line-height:1.2}
+.scale button:hover{border-color:var(--jade)}
+.scale button[aria-checked="true"]{background:var(--jade);border-color:var(--jade);color:var(--jade-ink)}
+.scale button[aria-checked="true"] span{color:var(--jade-ink)}
+.comment{padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.comment label{font-weight:600;font-size:14px}
+.comment textarea{width:100%;min-height:84px;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--paper)}
+
+.actions{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:12px 22px calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);border-radius:0 0 var(--r) var(--r)}
+.actions .grp{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--jade);border-color:var(--jade);color:var(--jade-ink)}
+.btn.seal{background:var(--seal);border-color:var(--seal);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px}
+.panel h2{font-family:var(--f-display);font-size:20px;margin:0}
+.panel p{margin:0;color:var(--muted);max-width:66ch}
+.field{display:flex;flex-direction:column;gap:6px;max-width:360px}
+.field input{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--paper)}
+.confirm{border:1.5px solid var(--seal);background:var(--seal-soft);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.confirm p{margin:0}
+
+.stamp{align-self:flex-start;font-family:var(--f-zh);color:var(--seal);border:2px solid var(--seal);border-radius:6px;padding:4px 12px;font-size:18px;letter-spacing:.2em;transform:rotate(-3deg)}
+
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-size:12px;color:var(--muted);font-weight:600;background:var(--paper)}
+td.n{font-family:var(--f-num);text-align:right}
+th.n{text-align:right}
+tr:last-child td{border-bottom:0}
+.roster-edit textarea{width:100%;min-height:360px;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--paper);font-family:var(--f-num);font-size:13px;line-height:1.7}
+
+@media (max-width:860px){
+  .judge{grid-template-columns:1fr}
+  .roster{display:none}
+  .mobile-pick{display:flex;gap:8px;align-items:center}
+  .mobile-pick select{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--surface)}
+  .item{grid-template-columns:1fr}
+  .scale button{flex:1;width:auto;height:50px}
+}
+@media (max-width:420px){.sheet-head,.item,.comment,.actions{padding-left:16px;padding-right:16px}.scale button span{font-size:9px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.roster li.grp{font-size:11px;letter-spacing:.08em;color:var(--muted);padding:10px 8px 4px;font-weight:600}
+.field small{color:var(--muted);font-size:12px}
+.err{color:var(--seal);font-size:14px;margin:0}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">中国语言文化艺术节 · 1차 심사</span>
+      <h1>중국언어문화예술제 1차 심사표</h1>
+    </div>
+    <div class="judge-line">
+      <span>심사위원 <b id="judgeNameLabel">—</b></span>
+      <span id="saveState" class="savestate pending">로그인 전</span>
+      <button class="linkbtn" id="logoutBtn" hidden>심사위원 변경</button>
+    </div>
+  </header>
+  <div id="banner" class="notice warn" hidden></div>
+  <section id="view"></section>
+</div>
+
+<script>
+/* ===== 설정: Apps Script 웹 앱 배포 후 받은 URL을 따옴표 안에 붙여 넣으세요 ===== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFsBurPpE0u6OaScq__wYbGhfGP2iAvtyKJweE5P7-RypBj7qswNtwfbwgA8LRMTaW6w/exec";
+/* ===================================================================== */
+
+(() => {
+const SCALE = ["매우 미흡","미흡","보통","우수","매우 우수"];
+const CATS = {
+  topic:  {label:"말하기 · 주제말하기", short:"주제말하기", zh:"演讲", rubric:"speech"},
+  recite: {label:"말하기 · 낭송",       short:"낭송",      zh:"朗诵", rubric:"speech"},
+  art:    {label:"문화예술",            short:"문화예술",  zh:"文艺", rubric:"art"}
+};
+const RUBRICS = {
+  speech: {
+    name:"말하기 부문", note:"주제말하기(내 인생의 잊지 못할 경험)와 낭송 공통",
+    items:[
+      {t:"발음 및 성조의 정확성", d:"표준 중국어 발음(성모, 운모, 성조, 경성, 얼화 등)을 정확히 구사하며, 왜곡이 없는가?"},
+      {t:"유창성 및 운율감", d:"어속과 호흡 조절이 자연스럽고, 문맥에 맞는 쉼과 중국어 특유의 리듬감이 살아있는가?"},
+      {t:"내용성 및 텍스트 소화력", split:{
+        topic:"<b>주제말하기:</b> 구성 논리와 메시지의 진정성이 돋보이는가? (직접 작성한 원고의 구성과 내용 포함)",
+        recite:"<b>낭송:</b> 작품의 정서와 주제를 깊이 이해하고 체화하여 전달하는가? (원고 작성은 평가하지 않음)"}},
+      {t:"감정 표현 및 전달력", d:"단순 암기를 넘어 분위기 변화를 목소리 톤에 살려 관객에게 감동과 설득력을 주는가?"},
+      {t:"무대 태도 및 비언어적 표현", d:"시선 처리, 표정, 제스처가 당당하고 자연스러우며 발표 시간/완성도를 준수했는가?"}
+    ]},
+  art: {
+    name:"문화예술 부문", note:"악기 연주, 경극·상성 등 공연, 노래, 무용",
+    items:[
+      {t:"기교 및 기술적 완성도", d:"악기 운지/주법, 가창의 음정/박자, 무대 동작 등 기본기가 탄탄하며 실수 없이 완주하는가?"},
+      {t:"예술적 표현력 및 감정 전달", d:"작품의 정서와 음악적/극적 다이내믹(강약, 속도, 호흡)을 섬세하게 살려 몰입감을 주는가?"},
+      {t:"중국 문화/예술 이해도", d:"전통 악곡의 풍격, 경극/상성의 발성과 동작 양식 등 고유의 양식을 올바르게 소화했는가?"},
+      {t:"무대 장악력 및 연출 완성도", d:"의상, 소품, 반주(MR)와의 조화 및 자신감 있는 시선 처리와 무대 매너가 우수한가?"},
+      {t:"창의성 및 노력도", d:"난이도 있는 작품에 대한 도전 및 본인만의 개성과 정성이 돋보이는가?"}
+    ]}
+};
+/* 참가자 명단: 순서·이름·부문을 바꾸려면 여기만 고치면 됩니다. cat: topic(주제말하기) / recite(낭송) / art(문화예술) */
+const ROSTER = [
+  {id:"p01", group:"교외", name:"손문정", cat:"art",    piece:"노래"},
+  {id:"p02", group:"교외", name:"금사광", cat:"art",    piece:"연주"},
+  {id:"p03", group:"교외", name:"송가은", cat:"art",    piece:"경극"},
+  {id:"p04", group:"교외", name:"신희서", cat:"art",    piece:"연주"},
+  {id:"p05", group:"교외", name:"김효서", cat:"art",    piece:"연주"},
+  {id:"p06", group:"교외", name:"박단비", cat:"art",    piece:"연주"},
+  {id:"p07", group:"교외", name:"윤서진", cat:"art",    piece:"무용"},
+  {id:"p08", group:"교외", name:"윤서윤", cat:"topic",  piece:""},
+  {id:"p09", group:"교외", name:"박준우", cat:"recite", piece:""},
+  {id:"p10", group:"교외", name:"임오",   cat:"recite", piece:""},
+  {id:"p11", group:"교외", name:"김우진", cat:"recite", piece:""},
+  {id:"p12", group:"교외", name:"정진유", cat:"recite", piece:""},
+  {id:"p13", group:"교내", name:"박민호", cat:"topic",  piece:""},
+  {id:"p14", group:"교내", name:"안용섭", cat:"topic",  piece:""},
+  {id:"p15", group:"교내", name:"임영희", cat:"topic",  piece:""}
+];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SESSION_KEY = "cl-fest-session";
+const lsKey = n => "cl-fest-sheet:" + n;
+function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+
+let judge = null;           // {name, code}
+let sheet = null;           // {status, current, scores, updatedAt, submittedAt}
+let online = !!SCRIPT_URL, confirming = false;
+const blank = () => ({status:"draft", current:ROSTER[0].id, scores:{}, updatedAt:0, submittedAt:0});
+
+const sum = a => a.reduce((x,y)=>x+(y||0),0);
+const filled = a => a.filter(v=>v).length;
+const sOf = pid => sheet.scores[pid]?.s || [null,null,null,null,null];
+const entry = pid => (sheet.scores[pid] ||= {s:[null,null,null,null,null], comment:""});
+const statusOf = pid => { const n = filled(sOf(pid)); return n===5?"done":n?"part":"none"; };
+const doneCount = () => ROSTER.filter(p=>statusOf(p.id)==="done").length;
+const catLine = p => CATS[p.cat].label + (p.piece ? " · " + p.piece : "");
+
+/* ---------- server ---------- */
+async function api(body){
+  const r = await fetch(SCRIPT_URL, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(body)});
+  if(!r.ok) throw new Error("http " + r.status);
+  return r.json();
+}
+function rosterForServer(){ return ROSTER.map((p,i)=>({no:i+1, id:p.id, group:p.group, name:p.name, cat:CATS[p.cat].label, rubric:CATS[p.cat].rubric, piece:p.piece})); }
+
+/* ---------- saving ---------- */
+let timer = null, inFlight = false, again = false;
+function setSave(t, cls=""){ const el=$("#saveState"); el.textContent=t; el.className="savestate "+cls; }
+function showBanner(t){ const b=$("#banner"); b.textContent=t||""; b.hidden=!t; }
+function touch(){ sheet.updatedAt = Date.now(); lsSet(lsKey(judge.name), sheet); setSave("저장 중…","pending"); clearTimeout(timer); timer = setTimeout(flush, 1000); }
+async function flush(){
+  clearTimeout(timer);
+  lsSet(lsKey(judge.name), sheet);
+  if(!online){ setSave("이 기기에 임시저장됨","local"); return; }
+  if(inFlight){ again = true; return; }
+  inFlight = true;
+  try{
+    const res = await api({action:"save", name:judge.name, code:judge.code, state:sheet, roster:rosterForServer()});
+    if(!res.ok) throw new Error(res.error||"save");
+    const t = new Date(); setSave("자동 저장됨 "+String(t.getHours()).padStart(2,"0")+":"+String(t.getMinutes()).padStart(2,"0"));
+    showBanner("");
+  }catch(e){
+    setSave("서버 저장 실패 · 이 기기에 임시저장됨","local");
+    showBanner("인터넷 연결이 불안정해 서버에 저장하지 못했습니다. 점수는 이 기기에 남아 있고, 다음 클릭 때 다시 저장을 시도합니다.");
+  }finally{
+    inFlight = false;
+    if(again){ again = false; flush(); }
+  }
+}
+window.addEventListener("beforeunload", e => { if(inFlight || timer && $("#saveState").classList.contains("pending")){ e.preventDefault(); e.returnValue=""; } });
+
+/* ---------- login ---------- */
+function renderLogin(msg){
+  $("#judgeNameLabel").textContent = "—"; $("#logoutBtn").hidden = true;
+  setSave(online ? "로그인 전" : "서버 미연결", online ? "pending" : "local");
+  $("#view").innerHTML = `<div class="panel">
+    <h2>심사를 시작합니다</h2>
+    <p>성명과 <b>본인이 정한 개인 코드</b>를 입력해 주세요. 처음 입력하시면 그 코드로 등록되고, 다음에 같은 성명과 코드를 넣으면 어느 기기에서든 하던 데서부터 이어서 심사할 수 있습니다.</p>
+    <p>점수는 클릭할 때마다 자동으로 저장됩니다.</p>
+    <div class="legend">${SCALE.map((s,i)=>`<span><b>${i+1}</b>${s}</span>`).join("")}</div>
+    <form id="loginForm" style="display:flex;flex-direction:column;gap:12px">
+      <div class="field"><label for="jn">심사위원 성명</label><input id="jn" required autocomplete="name" placeholder="예: 김OO"></div>
+      <div class="field"><label for="jc">개인 코드</label><input id="jc" required inputmode="numeric" autocomplete="off" minlength="4" maxlength="12" placeholder="숫자 4자리 이상">
+        <small>다른 분이 내 심사표를 열지 못하게 하는 비밀번호입니다. 잊지 않도록 기억해 두세요.</small></div>
+      ${msg?`<p class="err" role="alert">${esc(msg)}</p>`:""}
+      <button class="btn primary" type="submit" id="loginBtn" style="align-self:flex-start">심사 시작</button>
+    </form></div>`;
+  const s = lsGet(SESSION_KEY); if(s?.name) $("#jn").value = s.name;
+  $("#loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const name = $("#jn").value.trim().replace(/\s+/g," "), code = $("#jc").value.trim();
+    if(!/^\d{4,12}$/.test(code)){ renderLogin("개인 코드는 숫자 4~12자리로 정해 주세요."); $("#jn").value=name; return; }
+    $("#loginBtn").disabled = true; $("#loginBtn").textContent = "확인 중…";
+    await login(name, code);
+  });
+}
+async function login(name, code){
+  const local = lsGet(lsKey(name));
+  if(online){
+    try{
+      const res = await api({action:"login", name, code});
+      if(!res.ok){
+        if(res.error==="code") return renderLogin("이미 등록된 성명입니다. 개인 코드가 맞는지 확인해 주세요. 동명이인이라면 성명 뒤에 소속을 붙여 주세요.");
+        throw new Error(res.error);
+      }
+      judge = {name, code};
+      const remote = res.state;
+      if(remote && (!local || (remote.updatedAt||0) >= (local.updatedAt||0))) sheet = remote;
+      else { sheet = local || blank(); if(local) setTimeout(flush, 50); }
+    }catch(e){
+      online = false;
+      showBanner("서버에 연결하지 못해 이 기기에만 임시저장합니다. 인터넷 연결을 확인한 뒤 새로고침하면 서버 저장이 다시 시작됩니다.");
+      judge = {name, code}; sheet = local || blank();
+    }
+  } else {
+    showBanner("아직 저장 서버가 연결되지 않았습니다(SCRIPT_URL 비어 있음). 지금은 이 기기에만 임시저장됩니다.");
+    judge = {name, code}; sheet = local || blank();
+  }
+  sheet.scores ||= {};
+  if(!ROSTER.find(p=>p.id===sheet.current)) sheet.current = ROSTER[0].id;
+  lsSet(SESSION_KEY, {name});
+  try{ sessionStorage.setItem("cl-fest-code", code); }catch(e){}
+  $("#judgeNameLabel").textContent = name; $("#logoutBtn").hidden = false;
+  setSave(online ? "서버에 연결됨 · 자동 저장" : "이 기기에 임시저장됨", online ? "" : "local");
+  render();
+}
+$("#logoutBtn").addEventListener("click", async () => {
+  await flush(); judge = null; sheet = null; confirming = false;
+  try{ sessionStorage.removeItem("cl-fest-code"); }catch(e){}
+  showBanner(""); renderLogin();
+});
+
+/* ---------- judging ---------- */
+function render(){
+  if(sheet.status==="submitted") return renderSubmitted();
+  const idx = ROSTER.findIndex(p=>p.id===sheet.current), p = ROSTER[idx];
+  const rub = RUBRICS[CATS[p.cat].rubric], e = entry(p.id), dc = doneCount();
+  let lastGroup = "";
+  const rows = ROSTER.map((q,i) => {
+    let h = "";
+    if(q.group !== lastGroup){ lastGroup = q.group; h += `<li class="grp">${esc(q.group)}참가자</li>`; }
+    return h + `<li><button data-pid="${q.id}" aria-current="${q.id===p.id}">
+      <span class="rnum">${String(i+1).padStart(2,"0")}</span>
+      <span class="rname"><span>${esc(q.name)}</span><small>${CATS[q.cat].short}${q.piece?" · "+esc(q.piece):""}</small></span>
+      <span class="rscore" data-score="${q.id}">${chip(q.id)}</span></button></li>`;
+  }).join("");
+
+  $("#view").innerHTML = `<div class="judge">
+    <aside class="roster" aria-label="참가자 목록">
+      <div class="roster-head"><h2>참가자 ${ROSTER.length}명</h2><span class="progress" id="prog">${dc}/${ROSTER.length} 완료</span></div>
+      <div class="bar"><i id="progBar" style="width:${dc/ROSTER.length*100}%"></i></div>
+      <ol id="rosterList">${rows}</ol>
+    </aside>
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+      <div class="mobile-pick"><label for="mpick" class="eyebrow">참가자</label>
+        <select id="mpick">${ROSTER.map((q,i)=>`<option value="${q.id}" ${q.id===p.id?"selected":""}>${optText(q,i)}</option>`).join("")}</select></div>
+      <article class="sheet">
+        <div class="sheet-head">
+          <div class="who">
+            <span class="num">NO. ${String(idx+1).padStart(2,"0")} / ${ROSTER.length} · ${esc(p.group)}</span>
+            <h2>${esc(p.name)}</h2>
+            <span class="cat"><span class="seal">${CATS[p.cat].zh}</span>${esc(catLine(p))}</span>
+          </div>
+          <div class="total"><span class="lab">총점</span><span class="val"><span id="totalVal">${sum(e.s)}</span><small> / 25</small></span></div>
+        </div>
+        <div style="margin:14px 22px 0;color:var(--muted);font-size:14px">
+          <b style="color:var(--ink)">${rub.name}</b> · ${rub.note}
+          <div class="legend" style="margin-top:4px">${SCALE.map((s,i)=>`<span><b>${i+1}</b>${s}</span>`).join("")}</div>
+        </div>
+        <div class="items">${rub.items.map((it,k)=>itemRow(it,k,e,p.cat)).join("")}</div>
+        <div class="comment"><label for="cmt">심사평</label>
+          <textarea id="cmt" placeholder="강점, 보완점 등을 자유롭게 적어 주세요.">${esc(e.comment)}</textarea></div>
+        <div class="actions">
+          <div class="grp">
+            <button class="btn" id="prevBtn" ${idx<=0?"disabled":""}>이전</button>
+            <button class="btn" id="saveBtn">임시저장</button>
+          </div>
+          <div class="grp">
+            <button class="btn primary" id="nextBtn">다른 참가자 평가</button>
+            <button class="btn seal" id="doneBtn">완료 · 제출</button>
+          </div>
+        </div>
+      </article>
+      <div id="confirmBox"></div>
+    </div></div>`;
+
+  $("#rosterList").addEventListener("click", ev => { const b = ev.target.closest("button[data-pid]"); if(b) go(b.dataset.pid); });
+  $("#mpick").addEventListener("change", ev => go(ev.target.value));
+  document.querySelectorAll(".scale").forEach(g => g.addEventListener("click", ev => {
+    const b = ev.target.closest("button[data-v]"); if(!b) return;
+    const k = +g.dataset.k, v = +b.dataset.v;
+    e.s[k] = e.s[k]===v ? null : v;
+    g.querySelectorAll("button").forEach(x => x.setAttribute("aria-checked", String(+x.dataset.v===e.s[k])));
+    refresh(p.id); touch();
+  }));
+  $("#cmt").addEventListener("input", ev => { e.comment = ev.target.value; touch(); });
+  $("#prevBtn").addEventListener("click", () => idx>0 && go(ROSTER[idx-1].id));
+  $("#saveBtn").addEventListener("click", () => { sheet.updatedAt = Date.now(); flush(); });
+  $("#nextBtn").addEventListener("click", next);
+  $("#doneBtn").addEventListener("click", () => { confirming = true; renderConfirm(); });
+  if(confirming) renderConfirm();
+}
+function chip(pid){ const st = statusOf(pid); return st==="none"?`<span class="chip">미평가</span>`:st==="part"?`<span class="chip part">${filled(sOf(pid))}/5</span>`:`<span class="chip done">${sum(sOf(pid))}점</span>`; }
+function optText(q,i){ return `${i+1}. ${q.name} (${CATS[q.cat].short}) ${statusOf(q.id)==="done"?"✓ "+sum(sOf(q.id))+"점":""}`; }
+function itemRow(it,k,e,cat){
+  const desc = it.split
+    ? `<ul class="split">${Object.entries(it.split).map(([c,txt])=>`<li class="${c===cat?"on":""}">${txt}</li>`).join("")}</ul>`
+    : `<p>${it.d}</p>`;
+  return `<div class="item"><div><h3><span class="n">${k+1}</span>${it.t}</h3>${desc}</div>
+    <div class="scale" role="radiogroup" aria-label="${it.t}" data-k="${k}">
+      ${[1,2,3,4,5].map(n=>`<button type="button" role="radio" data-v="${n}" aria-checked="${e.s[k]===n}"><b>${n}</b><span>${SCALE[n-1]}</span></button>`).join("")}
+    </div></div>`;
+}
+function refresh(pid){
+  $("#totalVal").textContent = sum(entry(pid).s);
+  const cell = document.querySelector(`[data-score="${pid}"]`); if(cell) cell.innerHTML = chip(pid);
+  const dc = doneCount(); $("#prog").textContent = `${dc}/${ROSTER.length} 완료`; $("#progBar").style.width = (dc/ROSTER.length*100)+"%";
+  const i = ROSTER.findIndex(q=>q.id===pid), o = document.querySelector(`#mpick option[value="${pid}"]`); if(o) o.textContent = optText(ROSTER[i], i);
+}
+function go(pid){ sheet.current = pid; confirming = false; touch(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+function next(){
+  const idx = ROSTER.findIndex(p=>p.id===sheet.current);
+  for(let s=1; s<=ROSTER.length; s++){ const q = ROSTER[(idx+s)%ROSTER.length]; if(statusOf(q.id)!=="done") return go(q.id); }
+  confirming = true; renderConfirm();
+}
+function renderConfirm(){
+  const box = $("#confirmBox"); if(!box) return;
+  if(!confirming){ box.innerHTML = ""; return; }
+  const missing = ROSTER.filter(p=>statusOf(p.id)!=="done");
+  box.innerHTML = `<div class="confirm" role="alertdialog" aria-labelledby="cfT">
+    <p id="cfT"><b>${missing.length ? `아직 채점이 끝나지 않은 참가자가 ${missing.length}명 있습니다.` : `${ROSTER.length}명 모두 채점했습니다.`}</b>
+    ${missing.length ? "제출하면 미완료 항목은 빈칸으로 집계됩니다." : "제출하면 주최 측 집계에 반영됩니다. 제출 후에도 다시 열어 수정할 수 있습니다."}</p>
+    ${missing.length ? `<p style="font-size:14px;color:var(--muted)">미완료: ${missing.map(p=>esc(p.name)).join(", ")}</p>` : ""}
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${missing.length ? `<button class="btn primary" id="cfGo">남은 참가자 평가하기</button>` : ""}
+      <button class="btn seal" id="cfSubmit">${missing.length ? "그래도 제출" : "제출"}</button>
+      <button class="btn" id="cfCancel">취소</button>
+    </div></div>`;
+  box.scrollIntoView({behavior:"smooth", block:"nearest"});
+  $("#cfCancel").onclick = () => { confirming = false; renderConfirm(); };
+  if($("#cfGo")) $("#cfGo").onclick = () => go(missing[0].id);
+  $("#cfSubmit").onclick = async () => {
+    confirming = false; sheet.status = "submitted"; sheet.submittedAt = Date.now(); sheet.updatedAt = Date.now();
+    $("#cfSubmit").disabled = true; await flush(); render();
+  };
+}
+function renderSubmitted(){
+  const d = new Date(sheet.submittedAt || Date.now());
+  const rows = ROSTER.map((p,i)=>{ const s = sOf(p.id);
+    return `<tr><td class="n">${i+1}</td><td>${esc(p.group)}</td><td>${esc(p.name)}</td><td>${esc(catLine(p))}</td>${s.map(x=>`<td class="n">${x??"·"}</td>`).join("")}<td class="n"><b>${filled(s)?sum(s):"—"}</b></td></tr>`; }).join("");
+  $("#view").innerHTML = `<div class="panel">
+    <span class="stamp">已提交</span>
+    <h2>심사표가 제출되었습니다</h2>
+    <p>${esc(judge.name)} 심사위원 · ${d.getMonth()+1}월 ${d.getDate()}일 ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")} 제출. 수고하셨습니다.</p>
+    ${online ? "" : `<p class="err">서버에 연결되지 않아 이 기기에만 저장되어 있습니다. 인터넷 연결 후 새로고침하고 다시 로그인하면 자동으로 전송됩니다.</p>`}
+    <div class="tablebox"><table><thead><tr><th class="n">번호</th><th>구분</th><th>참가자</th><th>부문</th><th class="n">1</th><th class="n">2</th><th class="n">3</th><th class="n">4</th><th class="n">5</th><th class="n">총점</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div><button class="btn" id="reopen">다시 열어 수정하기</button></div></div>`;
+  $("#reopen").onclick = () => { sheet.status = "draft"; touch(); render(); };
+}
+
+/* ---------- boot: 같은 탭에서 새로고침하면 자동 재로그인 ---------- */
+const s = lsGet(SESSION_KEY); let c = null; try{ c = sessionStorage.getItem("cl-fest-code"); }catch(e){}
+if(s?.name && c) login(s.name, c); else renderLogin();
+})();
+</script>
+</body>
+</html>
