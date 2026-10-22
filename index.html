@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&family=Noto+Serif+SC:wght@600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>[hidden]{display:none!important} html{-webkit-text-size-adjust:100%} body{margin:0}</style>
 <style>
-/* Layout: sticky roster of 17 on the left, one scoring sheet on the right, action bar pinned to the sheet's foot. Celadon on ink, vermilion only for the seal of submission. */
+/* Layout: sticky roster on the left, one scoring sheet on the right, action bar pinned to the sheet's foot. Celadon on ink, vermilion only for the seal of submission. */
 :root{
   --paper:#F3F6F4; --surface:#FFFFFF; --ink:#18211E; --muted:#5A6863; --line:#D6DFDA;
   --jade:#2B7A67; --jade-ink:#FFFFFF; --jade-soft:#E1EFEA; --seal:#B23A2C; --seal-soft:#F7E4E1; --warn:#9A6210; --warn-soft:#F6ECD9;
@@ -161,7 +161,7 @@ tr:last-child td{border-bottom:0}
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <span class="eyebrow">中国语言文化艺术节 · 1차 심사</span>
+      <span class="eyebrow">中国语言文化艺术节 · 1차 심사 · 명단 2차 수정(10/22)</span>
       <h1>중국언어문화예술제 1차 심사표</h1>
     </div>
     <div class="judge-line">
@@ -210,26 +210,39 @@ const RUBRICS = {
 };
 /* 참가자 명단: 순서·이름·부문을 바꾸려면 여기만 고치면 됩니다. cat: topic(주제말하기) / recite(낭송) / art(문화예술) */
 const ROSTER = [
-  {id:"p01", group:"교외", name:"손문정", cat:"art",    piece:"노래"},
-  {id:"p02", group:"교외", name:"금사광", cat:"art",    piece:"연주"},
-  {id:"p03", group:"교외", name:"송가은", cat:"art",    piece:"경극"},
-  {id:"p04", group:"교외", name:"신희서", cat:"art",    piece:"연주"},
-  {id:"p05", group:"교외", name:"김효서", cat:"art",    piece:"연주"},
-  {id:"p06", group:"교외", name:"박단비", cat:"art",    piece:"연주"},
-  {id:"p07", group:"교외", name:"윤서진", cat:"art",    piece:"무용"},
-  {id:"p08", group:"교외", name:"윤서윤", cat:"topic",  piece:""},
-  {id:"p09", group:"교외", name:"박준우", cat:"recite", piece:""},
-  {id:"p10", group:"교외", name:"임오",   cat:"recite", piece:""},
-  {id:"p11", group:"교외", name:"김우진", cat:"recite", piece:""},
-  {id:"p12", group:"교외", name:"정진유", cat:"recite", piece:""},
-  {id:"p13", group:"교내", name:"박민호", cat:"topic",  piece:""},
-  {id:"p14", group:"교내", name:"안용섭", cat:"topic",  piece:""},
-  {id:"p15", group:"교내", name:"임영희", cat:"topic",  piece:""}
+  {id:"r2-01", group:"교내", name:"박대서", cat:"topic", piece:"最短的路，未必是最快的路。人生也是如此。"},
+  {id:"r2-02", group:"교내", name:"박민호", cat:"topic", piece:"중국어 공부 목적"},
+  {id:"r2-03", group:"교내", name:"안용섭", cat:"topic", piece:"인생에서 중요한 세가지 선택"},
+  {id:"r2-04", group:"교내", name:"이덕미", cat:"topic", piece:"《40岁以后，我用汉语重启人生》"},
+  {id:"r2-05", group:"교내", name:"임영희", cat:"topic", piece:"내 인생 최고의 도전, 2020 퓨처쇼를 만들다."},
+  {id:"r2-06", group:"교내", name:"이효림", cat:"art", piece:"노래 · 怒放的生命"},
+  {id:"r2-07", group:"교외", name:"박단비", cat:"art", piece:"연주 · 琵琶《上春山》"},
+  {id:"r2-08", group:"교외", name:"송가은 · LYU RUI · 민호율 (팀)", cat:"art", piece:"연극 · 콰이반 연극《삼영전여포》"},
+  {id:"r2-09", group:"교외", name:"신희서", cat:"art", piece:"연주 · 고쟁《瑶族舞曲》(요족무곡)"},
+  {id:"r2-10", group:"교외", name:"심은빛", cat:"art", piece:"연주 · 금사광무"},
+  {id:"r2-11", group:"교외", name:"김효서", cat:"art", piece:"연주 · 大浪淘沙"},
+  {id:"r2-12", group:"교외", name:"윤서진", cat:"art", piece:"무용 · 중국춤"},
+  {id:"r2-13", group:"교외", name:"임예린", cat:"art", piece:"노래 · 星斗照高楼"},
+  {id:"r2-14", group:"교외", name:"백신희", cat:"art", piece:"노래 · 《我长大了》(나는 자랐어요)"},
+  {id:"r2-15", group:"교외", name:"LYU RUI", cat:"art", piece:"연주 · 전태풍"},
+  {id:"r2-16", group:"교외", name:"왕선미", cat:"art", piece:"노래 · 明月几时有(밝은 달은 언제쯤 뜨는가)"},
+  {id:"r2-17", group:"교외", name:"최수혁", cat:"art", piece:"노래 · 蜗牛"},
+  {id:"r2-18", group:"교외", name:"염지현", cat:"art", piece:"음창 · 쾌반《同仁堂》(동인당)"},
+  {id:"r2-19", group:"교외", name:"윤한석", cat:"art", piece:"음창 · 백룡마"},
+  {id:"r2-20", group:"교외", name:"판뤄신", cat:"art", piece:"연주 · 얼후 독주《萱草花》(원추리꽃)"},
+  {id:"r2-21", group:"교외", name:"김우진", cat:"recite", piece:"《水调歌头·明月几时有》"},
+  {id:"r2-22", group:"교외", name:"박동민", cat:"recite", piece:"登鹳雀楼"},
+  {id:"r2-23", group:"교외", name:"임오", cat:"recite", piece:"贯口《小孩子》"},
+  {id:"r2-24", group:"교외", name:"김태현", cat:"topic", piece:"一次让我在后悔中成长的经历"},
+  {id:"r2-25", group:"교외", name:"박준우", cat:"topic", piece:"나의 첫 중국여행"},
+  {id:"r2-26", group:"교외", name:"윤서윤", cat:"topic", piece:"다채로운 중국"},
+  {id:"r2-27", group:"교외", name:"장민희", cat:"topic", piece:"我人生中最难忘的经历"},
+  {id:"r2-28", group:"교외", name:"정진유", cat:"topic", piece:"내 책가방에 들어있는 세계"}
 ];
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const SESSION_KEY = "cl-fest-session";
-const lsKey = n => "cl-fest-sheet:" + n;
+const SESSION_KEY = "cl-fest2-session";
+const lsKey = n => "cl-fest2-sheet:" + n;
 function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch(e){ return null; } }
 function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
@@ -331,14 +344,14 @@ async function login(name, code){
   sheet.scores ||= {};
   if(!ROSTER.find(p=>p.id===sheet.current)) sheet.current = ROSTER[0].id;
   lsSet(SESSION_KEY, {name});
-  try{ sessionStorage.setItem("cl-fest-code", code); }catch(e){}
+  try{ sessionStorage.setItem("cl-fest2-code", code); }catch(e){}
   $("#judgeNameLabel").textContent = name; $("#logoutBtn").hidden = false;
   setSave(online ? "서버에 연결됨 · 자동 저장" : "이 기기에 임시저장됨", online ? "" : "local");
   render();
 }
 $("#logoutBtn").addEventListener("click", async () => {
   await flush(); judge = null; sheet = null; confirming = false;
-  try{ sessionStorage.removeItem("cl-fest-code"); }catch(e){}
+  try{ sessionStorage.removeItem("cl-fest2-code"); }catch(e){}
   showBanner(""); renderLogin();
 });
 
@@ -471,7 +484,7 @@ function renderSubmitted(){
 }
 
 /* ---------- boot: 같은 탭에서 새로고침하면 자동 재로그인 ---------- */
-const s = lsGet(SESSION_KEY); let c = null; try{ c = sessionStorage.getItem("cl-fest-code"); }catch(e){}
+const s = lsGet(SESSION_KEY); let c = null; try{ c = sessionStorage.getItem("cl-fest2-code"); }catch(e){}
 if(s?.name && c) login(s.name, c); else renderLogin();
 })();
 </script>
